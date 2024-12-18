@@ -4,6 +4,7 @@ import json
 import argparse
 import openpyxl
 import datetime
+from auth import load_tokens
 from cli import parse_arguments
 from config import baseURL, auth, plussymbol, get_command_url, get_api_key
 
@@ -14,9 +15,11 @@ header = [
 	"last call agent name"
 ]
 lines_appended = 0
-
 args = parse_arguments()
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+tokens = load_tokens('auth.csv')
+
+
 
 def clean_json(data):
 	if isinstance(data, dict):
@@ -29,7 +32,7 @@ def clean_json(data):
 def make_request(command, **kwargs):
 	url_command = get_command_url(command, **kwargs)
 	if url_command:
-		authURL = baseURL + get_api_key(**kwargs)
+		authURL = baseURL + tokens.get(kwargs.get('api_key'))
 		full_url = authURL + url_command
 		if command == "message":
 			pass
@@ -69,7 +72,7 @@ def make_request(command, **kwargs):
 						columns = [col.strip().strip('"') for col in columns]
 						lines_list.append(columns)
 						sheet.append(columns)
-					workbook.save("output.xlsx")
+					workbook.save(f"contact_list_{kwargs.get('contact_list')}.xlsx")
 		else:
 			print("Error:", response.status_code, response.text)
 

@@ -15,7 +15,7 @@ def parse_arguments():
         '--api_key',
         type=str,
         default=0,
-        help="API Key, self explanatory duhhhh"
+        help="ClientID of the client, key will be parsed by script"
     )
     parser.add_argument(
         '--phone_number',
