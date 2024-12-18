@@ -3,7 +3,12 @@ plussymbol = '%2B'
 #ea45913a5dee0adc0b07c83212948bd0
 #994 API KEY
 auth = 'empty'
-
+header = [
+    'contact id', 'phone number', 'first name', 'last name', 'address', 'postal code',
+    'city', 'is finalized(*)', 'contact updated at', 'phone number updated at',
+    'phone number last call date', 'last call result name', 'last call campaign name',
+    'last call agent name'
+]
 
 
 baseURL = 'https://api.leaddesk.com/?auth='

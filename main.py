@@ -5,14 +5,9 @@ import openpyxl
 import datetime
 from auth import load_tokens
 from cli import parse_arguments
-from config import baseURL, auth, plussymbol, get_command_url, get_api_key
+from config import baseURL, auth, plussymbol, get_command_url, get_api_key, header
 
-header = [
-    'contact id', 'phone number', 'first name', 'last name', 'address', 'postal code',
-    'city', 'is finalized(*)', 'contact updated at', 'phone number updated at',
-    'phone number last call date', 'last call result name', 'last call campaign name',
-    'last call agent name'
-]
+
 lines_appended = 0
 args = parse_arguments()
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
