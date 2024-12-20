@@ -34,7 +34,7 @@ def calls(command, response, **kwargs):
         client.exportlist(lines, kwargs.get("contact_list"))
         return
     if command == "findlist":
-        client.findlist(response, kwargs.get("list"))
+        client.findlist(response, kwargs.get("list"), True)
         return
     if command == "widget":
         json_data = json.loads(response.text)

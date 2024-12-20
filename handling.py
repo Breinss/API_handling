@@ -97,8 +97,7 @@ class APIClient:
         else:
             data = [item for item in json_data if name.lower() in item["name"].lower()]
             filtered_data = json.dumps(data, indent=4)
-            return data
-            if not silent:
+            if silent:
                 print(filtered_data)
                 return
             return
