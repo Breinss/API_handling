@@ -99,8 +99,8 @@ class APIClient:
             filtered_data = json.dumps(data, indent=4)
             if silent:
                 print(filtered_data)
-                return
-            return
+                return data
+            return data
         return
 
     def yes_no_question(self, prompt):
