@@ -30,7 +30,7 @@ arguments = [
     "findagent",
     "findlist",
     "widget",
-    "test",
+    "findandexport",
 ]
 
 commands = {
@@ -41,7 +41,7 @@ commands = {
     "findagent": lambda **kwargs: f"&mod=agent&cmd=find&username=*",
     "findlist": lambda **kwargs: f"&mod=calling_list&cmd=list",
     "widget": lambda **kwargs: f"&mod=widget&cmd=list",
-    "test": lambda **kwargs: f"&cmd=data&id=tab2UniqueContacts&param=week",
+    "findandexport": lambda **kwargs: f"&mod=calling_list&cmd=list",
 }
 
 

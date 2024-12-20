@@ -81,14 +81,40 @@ class APIClient:
         workbook.save(f"contact_list_{contact_list}.xlsx")
         return
 
-    def findlist(self, response, name=None):
+    def exportlists(self, list_id):
+        list_json = requests.get(
+            self.authURL + f"&mod=calling_list&cmd=export&id={list_id}"
+        )
+        lines = list_json.text.splitlines()
+        self.exportlist(lines, list_id)
+        return
+
+    def findlist(self, response, name="", silent=False):
         json_data = json.loads(response.text)
-        if name == 0:
+        if not name:
             formatted_response = json.dumps(json_data, indent=4)
             print(formatted_response)
         else:
             data = [item for item in json_data if name.lower() in item["name"].lower()]
             filtered_data = json.dumps(data, indent=4)
-            print(filtered_data)
+            return data
+            if not silent:
+                print(filtered_data)
+                return
+            return
+        return
+
+    def yes_no_question(self, prompt):
+        while True:
+            answer = input(f"{prompt} (yes/no): ").strip().lower()
+            if answer in ["yes", "y"]:
+                return True
+            elif answer in ["no", "n"]:
+                return False
+            else:
+                print("Please answer with 'yes', 'y', 'no', or 'n'.")
+
+    def findandexport(self, response, name):
+        if name != 0:
             return
         return

@@ -40,7 +40,18 @@ def calls(command, response, **kwargs):
         json_data = json.loads(response.text)
         print(json.dumps(json_data, indent=4))
         return
-    return
+    if command == "findandexport":
+        list = client.findlist(response, kwargs.get("list"), True)
+        if client.yes_no_question(
+            f"You are about to download {len(list)} items. Do you want to proceed?"
+        ):
+            print("You chose yes!")
+            for data in list:
+                print(data)  # Debug: Print each item in the list
+                client.exportlists(data["id"])  # Export the list
+        else:
+            print("You chose no!")
+            return  # Exit if the user chooses not to proceed
 
 
 def make_request(command, **kwargs):
